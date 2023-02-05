@@ -4,6 +4,9 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require('path');
 const dotenv = require('dotenv')
+
+
+//config do dotenv -variaveis de ambiente
 dotenv.config();
 
 
@@ -15,6 +18,9 @@ const routes = require("./src/routes/front.route")
 
 //usuario
 const userRoute = require("./src/routes/user.route");
+
+//login
+const authRote = require("./src/routes/auth.route");
 
 //mensagem de contato
 const messageRoute = require("./src/routes/message.route");
@@ -50,6 +56,7 @@ connectDatabase()
 //Rotas do backend
 app.use("/user",userRoute);
 app.use("/msg",messageRoute);
+app.use("/auth",authRote);
 
 // Rotas do frontend
 app.use(routes);
