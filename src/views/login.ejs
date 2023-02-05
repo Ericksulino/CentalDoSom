@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ 
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Cadastro</title>
+</head>
+<body>
+  <%- include('components/header') %>
+        <div>
+
+      <div class="container">
+        <div class="Msg-inicial">
+          <h1><b>Faça login com a sua conta</b></h1>
+        </div>
+          <form>
+            
+            <div style="position: relative;">
+              <label for="email"></label>
+              <input type="text" class="inputs required"oninput="emailValidate()" id="entrada" placeholder="E-mail" name="email">
+              <span class="span-required">Digite um email válido</span>
+            </div>
+            
+            <div style="position: relative;">
+              <label for="senha"></label>
+              <input type="password" class="inputs required"oninput="mainPasswValidate()" id="entrada" placeholder="Senha" name="senha">
+              <span class="span-required">A senha deve ter no mínimo 8 caracteres</span>
+            </div>
+            <div class="poss-conta">
+              <br>
+              <a style="color:rgba(255, 166, 0, 0.849);" href = "#">esqueci a senha</a>
+              <br>
+            </div>
+          
+            <p><button type="submit" id="button">Login</button></p>
+        
+          <p class="link">Não possui uma conta? <a href = "/CadUser">Cadastre-se</a></p>
+        </form>
+
+
+
+      </div>
+
+      <%- include('components/footer') %>
+	</div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html> 

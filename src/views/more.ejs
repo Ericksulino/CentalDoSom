@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+  />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <%- include('components/header') %>
+    <section id="wrap">
+        <div class="img">
+            <main>
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="project-img">
+                            <img src=<%=imagem || 'default-value-for-imagem'%> alt="Imagem 1 do item" class="fotoItem">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="project-img">
+                            
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="project-img">
+                            
+                        </div>
+                    </div>
+                    </div>
+                
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                </div>
+            </main>
+        </div>
+        <div class="tabela">
+            <h3><%=nome%>, R$<%=valor%></h3>
+        
+            </p>
+            <table class="informacoes">
+                <th>Descricao</th>
+                <tr id="Tipo"><p></p>Estado: <%=tipo%></tr>
+                <tr id="Categoria"> Categoria: <%=categoria%> </tr>
+                <td id="Descricao"><%=descricao%></td>
+                </tr>
+            </table>
+            <p><%=anunciante%><br>
+                Telefone: <%=telefone%>
+            </p>
+            <div class="contato">
+                <a href="https://wa.me/<%=telefone%>" id="button1">Entrar em contato</a>
+            </div>
+        </div>
+</section>
+  <%- include('components/footer') %>
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <script src="./scripts/scrpSlider.js"></script>
+</body>
+</html>
