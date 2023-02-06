@@ -3,9 +3,9 @@ const userService = require("../services/user.service");
 
 const create = async (req, res) =>{
     try{
-        const {name,email,number,password} = req.body;
+        const {name,email,number,city,state,password} = req.body;
 
-    if(!name || !email || !number || !password){
+    if(!name || !email || !number || !city || !state || !password){
         res.status(400).send({message: "envie todos os campos para o registro!"});
     }
 

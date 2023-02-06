@@ -9,18 +9,22 @@ let type = "";
 
 
 form.addEventListener('submit',(event)=>{
-  spans[6].style.display = 'none';
+  spans[8].style.display = 'none';
   event.preventDefault();
   nameValidate();
   emailValidate();
   telValidate();
+  cidadeValidate();
+  estadoValidate();
   mainPasswValidate();
   comparePassw();
   termos();
 
   let isValid = true;
   for (let i = 0; i < campos.length; i++) {
-    if (campos[i].style.border == '2px solid #e63636') {
+    let campo = campos[i].style.border
+    if ( campo == '2px solid #e63636') {
+      console.log(campo)
       isValid = false;
       break;
     }
@@ -33,7 +37,9 @@ form.addEventListener('submit',(event)=>{
       name: campos[0].value,
       email: campos[1].value,
       number: campos[2].value,
-      password: campos[3].value
+      city: campos[3].value,
+      state: campos[4].value,
+      password: campos[5].value
     };
     console.log(dados);
     fetch('/user', {
@@ -54,7 +60,7 @@ form.addEventListener('submit',(event)=>{
         message = ("ERRO ao Criar o Usuário!");
         type = "danger"
         console.log(message);
-        spans[6].style.display = 'block';
+        spans[8].style.display = 'block';
         //window.location.href = '/CadUser';
       }
     })
@@ -100,30 +106,48 @@ function telValidate(){
   }
 }
 
-function mainPasswValidate(){
-  if (campos[3].value.length < 8){
+function cidadeValidate(){
+  if (campos[3].value.length < 3){
     setError(3);
   }
   else{
     removError(3);
+  }
+}
+
+function estadoValidate(){
+  if (campos[4].value.length >1 && campos[4].value.length <3){
+    setError(4);
+  }
+  else{
+    removError(4);
+  }
+}
+
+function mainPasswValidate(){
+  if (campos[5].value.length < 8){
+    setError(5);
+  }
+  else{
+    removError(5);
     comparePassw();
   }
 }
 
 function comparePassw(){
-  if(campos[3].value == campos[4].value && campos[4].value.length>=8){
-    removError(4);
+  if(campos[5].value == campos[6].value && campos[6].value.length>=8){
+    removError(6);
   }
   else{
-    setError(4);
+    setError(6);
   }
 }
 
 function termos(){
-  if (campos[5].checked){
-    removError(5);
+  if (campos[7].checked){
+    removError(7);
   }
   else{
-    setError(5);
+    setError(7);
   }
 }
