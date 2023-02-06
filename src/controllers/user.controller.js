@@ -9,6 +9,11 @@ const create = async (req, res) =>{
         res.status(400).send({message: "envie todos os campos para o registro!"});
     }
 
+    const userExist = await userService.findByEmail(email);
+
+    if(userExist){
+        res.status(400).send({message: "Email já cadastrado!"});
+    }
     else{
     
     try{const user = await userService.createService(req.body)

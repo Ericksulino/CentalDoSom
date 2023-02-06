@@ -6,6 +6,8 @@ const findAllService = () => User.find();
 
 const findByIdService = (id) => User.findById(id);
 
+const findByEmail = (email) => User.findOne({email: email});
+
 const updateService = (
         id,
         name,
@@ -20,10 +22,10 @@ const updateService = (
     password, 
 });
 
-
 module.exports = {
     createService,
     findAllService,
+    findByEmail,
     findByIdService,
     updateService,
 };
