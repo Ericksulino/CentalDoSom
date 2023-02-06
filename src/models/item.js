@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const item = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
     nome: {
         type: String,
         require: true,
@@ -22,6 +22,11 @@ const item = new mongoose.Schema({
         require: true,
     },
     anunciante: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        require: true,
+    },
+    foto : {
         type: String,
         require: true,
     },
@@ -29,4 +34,8 @@ const item = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     }
+
 })
+
+const Item = mongoose.model('Item',itemSchema);
+model.exports = Item;
