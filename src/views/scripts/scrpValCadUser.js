@@ -116,7 +116,7 @@ function cidadeValidate(){
 }
 
 function estadoValidate(){
-  if (campos[4].value.length >1 && campos[4].value.length <3){
+  if (campos[4].value.length == 2){
     setError(4);
   }
   else{
