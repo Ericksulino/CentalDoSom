@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const { use } = require("../routes/auth.route");
-const { loginService } = require("../services/auth.service");
+const { loginService, generateToken } = require("../services/auth.service");
 
 const login = async(req,res) =>{
 
@@ -18,8 +18,9 @@ const login = async(req,res) =>{
         return res.status(400).send({message: "Usuário ou senha incorretos!"});
     }
    
+    const token = generateToken(user.id);
 
-    res.send("Login OK");
+    res.send({token});
     }catch (err){
         res.status(500).send(err.message);
     }

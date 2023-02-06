@@ -22,18 +22,18 @@
         <div class="Msg-inicial">
           <h1><b>Faça login com a sua conta</b></h1>
         </div>
-          <form>
+          <form id="form">
             
             <div style="position: relative;">
               <label for="email"></label>
               <input type="text" class="inputs required"oninput="emailValidate()" id="entrada" placeholder="E-mail" name="email">
-              <span class="span-required">Digite um email válido</span>
+              
             </div>
             
             <div style="position: relative;">
               <label for="senha"></label>
               <input type="password" class="inputs required"oninput="mainPasswValidate()" id="entrada" placeholder="Senha" name="senha">
-              <span class="span-required">A senha deve ter no mínimo 8 caracteres</span>
+              
             </div>
             <div class="poss-conta">
               <br>
@@ -42,6 +42,7 @@
             </div>
           
             <p><button type="submit" id="button">Login</button></p>
+            <span class="span-required">Usuário ou senha incorretos!</span>
         
           <p class="link">Não possui uma conta? <a href = "/CadUser">Cadastre-se</a></p>
         </form>
@@ -53,6 +54,46 @@
       <%- include('components/footer') %>
 	</div>
     
-    <script src="js/script.js"></script>
+    <script>
+      const form = document.getElementById('form');
+const campos = document.querySelectorAll('.required');
+const spans = document.querySelectorAll('.span-required');
+
+
+
+form.addEventListener('submit',(event)=>{
+  spans[0].style.display = 'none';
+  event.preventDefault();
+    // dados a serem enviados
+    const dados = {
+        email: campos[0].value,
+        password: campos[1].value,
+    };
+    //console.log(dados);
+    fetch('/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dados)
+    })
+    .then(res => {
+      console.log(res.status);
+      if (res.status === 200) {
+        message = ("Sucesso!");
+        type = "success";
+        console.log(message);
+        window.location.href = '/Home';
+
+      } else if (res.status === 400 || 500) {
+        message = ("Usuário ou senha incorretos!");
+        type = "danger"
+        console.log(message);
+        spans[0].style.display = 'block';
+        //window.location.href = '/CadUser';
+      }
+    })})
+
+    </script>
 </body>
 </html> 
