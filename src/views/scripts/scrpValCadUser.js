@@ -23,13 +23,14 @@ form.addEventListener('submit',(event)=>{
   let isValid = true;
   for (let i = 0; i < campos.length; i++) {
     let campo = campos[i].style.border
-    if ( campo == '2px solid #e63636') {
-      console.log(campo)
+    console.log(campo)
+    if ( campo == '2px solid rgb(230, 54, 54)') {
+      
       isValid = false;
       break;
     }
   }
-
+console.log(isValid);
   // se todos os dados estiverem corretos
   if (isValid) {
     // dados a serem enviados
@@ -41,7 +42,7 @@ form.addEventListener('submit',(event)=>{
       state: campos[4].value,
       password: campos[5].value
     };
-    console.log(dados);
+    //console.log(dados);
     fetch('/user', {
       method: 'POST',
       headers: {
@@ -116,11 +117,11 @@ function cidadeValidate(){
 }
 
 function estadoValidate(){
-  if (campos[4].value.length == 2){
-    setError(4);
+  if (campos[4].value.length === 2){
+    removError(4);
   }
   else{
-    removError(4);
+    setError(4);
   }
 }
 
