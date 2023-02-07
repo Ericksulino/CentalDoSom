@@ -144,8 +144,8 @@
         display: block;
     }
     .caixa-busca:hover>.busca-txt {
-        width: 25vw;
-        padding: 0 6px;
+        width: 22vw;
+        padding: 0 10px;
     }
     .Meio h1{
         font-size: 2rem;
