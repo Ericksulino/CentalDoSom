@@ -8,6 +8,7 @@ form.addEventListener('submit',(event)=>{
   event.preventDefault();
   nameValidate();
   cateValidade();
+  condValidade();
   descValidate();
   valValidate();
   imgValidate();
@@ -23,11 +24,14 @@ form.addEventListener('submit',(event)=>{
   if(isValid){
     const cadastro = new Cadastro();
     const dados = {
-      nome: campos[0].value,
-      email: campos[1].value,
-      senha: campos[2].value,
+      name: campos[0].value,
+      categoria: campos[1].value,
+      tipo: campos[2].value,
+      descricao: campos[3].value,
+      valor: campos[4].value,
+      foto: campos[5].value,
     };
-    cadastro.salvarDados(dados);
+    console.log(dados);
   }
 });
 
@@ -59,9 +63,9 @@ function cateValidade(){
     removError(1);
   }
 }
-
-function descValidate(){
-  if (campos[2].value.length < 10){
+function condValidade(){
+  console.log(campos[2].value)
+  if (campos[2].value == ""){
     setError(2);
   }
   else{
@@ -69,9 +73,8 @@ function descValidate(){
   }
 }
 
-function valValidate(){
-  console.log(campos[3].value)
-  if (campos[3].value == ""){
+function descValidate(){
+  if (campos[3].value.length < 10){
     setError(3);
   }
   else{
@@ -79,13 +82,23 @@ function valValidate(){
   }
 }
 
-function imgValidate(){
+function valValidate(){
   console.log(campos[4].value)
   if (campos[4].value == ""){
     setError(4);
   }
   else{
     removError(4);
+  }
+}
+
+function imgValidate(){
+  console.log(campos[5].value)
+  if (campos[5].value == ""){
+    setError(5);
+  }
+  else{
+    removError(5);
   }
 }
 

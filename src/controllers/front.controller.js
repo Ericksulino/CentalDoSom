@@ -1,11 +1,6 @@
 const getHome = (req,res) =>{
-    let message = req.session.message || "";
-    let type = req.session.type || "";
-
-    req.session.message = "";
-    req.session.type = "";
-
-    res.render("home", { message, type });
+ 
+    res.render("home");
 }
 
 const getLogin =(req,res) =>{
@@ -35,6 +30,7 @@ const geContato =(req,res) =>{
 }
 
 const getProds =(req,res) =>{
+
     res.render('meus_produtos');
 }
 

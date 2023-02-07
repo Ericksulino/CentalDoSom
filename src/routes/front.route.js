@@ -2,7 +2,7 @@ const routes = require("express").Router();
 const frontController = require("../controllers/front.controller");
 
 //routes.get("/Home",frontController.getHome);
-routes.get("/Home", (req, res) => {
+routes.get("/", (req, res) => {
     req.message = req.message || "";
     req.type = req.type || "";
     frontController.getHome(req, res);
