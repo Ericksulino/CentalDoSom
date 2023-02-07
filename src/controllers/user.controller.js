@@ -8,7 +8,7 @@ const create = async (req, res) =>{
     if(!name || !email || !number || !city || !state || !password){
         res.status(400).send({message: "envie todos os campos para o registro!"});
     }
-
+    else{
     const userExist = await userService.findByEmail(email);
 
     if(userExist){
@@ -35,6 +35,7 @@ const create = async (req, res) =>{
     })} catch(erro){
         res.status(500).send({message: err.message});
     }
+}
 }} catch(err){
     res.status(500).send({message: err.message});
 }

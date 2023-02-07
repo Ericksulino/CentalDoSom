@@ -6,9 +6,9 @@ const create = async (req,res) =>{
 
     if(!name || !categoria || !tipo || !descricao || !valor || !anunciante || !foto){
         res.status(400).send({message: "envie todos os campos para o registro!"});
+        
     }
-
-    
+    else {
     try{const item = await intemService.createService(req.body)
 
     if(!item){
@@ -21,6 +21,7 @@ const create = async (req,res) =>{
     })} catch(err){
         res.status(500).send({message: err.message});
     }
+}
 } catch(err){
     res.status(500).send({message: err.message});
 }
