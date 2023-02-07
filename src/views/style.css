@@ -107,6 +107,27 @@
     width: 240px;
     padding: 0 6px;
 }
+
+.Meio{
+    padding: 7rem 0 0 8.5rem;
+    line-height: 4rem;
+    text-align: left;
+    
+}
+.Meio p{
+    text-align: left;
+}
+.Meio h1{
+    font-size: 4rem;
+    color: #212529;
+    text-align: left;
+    display: grid;
+    
+}
+
+
+
+
 @media screen and (max-width: 768px) {
     .navigation_header{
         position: absolute;
@@ -126,7 +147,10 @@
         width: 25vw;
         padding: 0 6px;
     }
-
+    .Meio h1{
+        font-size: 2rem;
+        
+    }
 }
 @keyframes showSidebar {
     from {margin-left: -100vw;}
@@ -251,25 +275,7 @@ select{
     height: 100vh;
 }
 
-.Meio{
-    padding: 7rem 0 0 8.5rem;
-    line-height: 4rem;
-    text-align: left;
-    
-}
 
-.Meio h1{
-    font-size: 4rem;
-    color: #212529;
-    text-align: left;
-    display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(150px,auto));
-    
-}
-
-.Meio p{
-    text-align: left;
-}
 
 .Meio button{
     background-color: rgba(255, 166, 0, 0.849);
