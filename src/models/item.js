@@ -18,7 +18,7 @@ const itemSchema = new mongoose.Schema({
         require: true,
     },
     valor:{
-        type: Float,
+        type: String,
         require: true,
     },
     anunciante: {
@@ -38,4 +38,4 @@ const itemSchema = new mongoose.Schema({
 })
 
 const Item = mongoose.model('Item',itemSchema);
-model.exports = Item;
+module.exports = Item;

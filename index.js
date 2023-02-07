@@ -19,6 +19,9 @@ const routes = require("./src/routes/front.route")
 //usuario
 const userRoute = require("./src/routes/user.route");
 
+//item
+const itemRoute = require("./src/routes/item.route");
+
 //login
 const authRote = require("./src/routes/auth.route");
 
@@ -27,6 +30,9 @@ const messageRoute = require("./src/routes/message.route");
 
 //Rota com o Banco de dados
 const connectDatabase = require("./src/database/db")
+
+
+
 
 //Propriedades do servidor
 const app = express();
@@ -51,12 +57,14 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 //Conexão com o Banco de dados
-//connectDatabase()
+connectDatabase()
 
 //Rotas do backend
 app.use("/user",userRoute);
+app.use("/item",itemRoute);
 app.use("/msg",messageRoute);
 app.use("/auth",authRote);
+
 
 // Rotas do frontend
 app.use(routes);
