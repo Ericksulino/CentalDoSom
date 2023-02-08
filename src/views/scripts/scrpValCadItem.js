@@ -15,25 +15,47 @@ form.addEventListener('submit',(event)=>{
 
   let isValid = true;
   for(let i = 0; i < campos.length; i++){
-    if(campos[i].style.border == '2px solid #e63636'){
+    if(campos[i].style.border == '2px solid rgb(230, 54, 54)'){
       isValid = false;
       break;
     }
   }
-
+console.log(isValid)
   if(isValid){
-    const cadastro = new Cadastro();
     const dados = {
-      name: campos[0].value,
+      nome: campos[0].value,
       categoria: campos[1].value,
       tipo: campos[2].value,
       descricao: campos[3].value,
       valor: campos[4].value,
+      //anunciante:"63e0637fdd2d0f6fe5664025",
       foto: campos[5].value,
     };
-    console.log(dados);
+    //console.log(dados);
+    fetch('/item', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dados)
+    })
+    .then(res => {
+      if (res.status === 201) {
+        console.log(res.message);
+        window.location.href = '/';
+
+      } else if (res.status === 400 || 500) {
+        //message = ("ERRO ao Cadastrar o Item!");
+        //type = "danger"
+        console.log(res.json());
+        spans[6].style.display = 'block';
+        //window.location.href = '/CadUser';
+      }
+    })
   }
 });
+
+
 
 function setError(index){
   campos[index].style.border = '2px solid #e63636';
@@ -84,7 +106,7 @@ function descValidate(){
 
 function valValidate(){
   console.log(campos[4].value)
-  if (campos[4].value == ""){
+  if (campos[4].value == "" || parseFloat(campos[4].value) < 0){
     setError(4);
   }
   else{
