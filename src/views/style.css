@@ -112,10 +112,13 @@
     padding: 7rem 0 0 8.5rem;
     line-height: 4rem;
     text-align: left;
+   
     
 }
 .Meio p{
     text-align: left;
+    
+    
 }
 .Meio h1{
     font-size: 4rem;
@@ -125,7 +128,15 @@
     
 }
 
-
+.background{
+    background-image: url(../img/back.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+}
 
 
 @media screen and (max-width: 768px) {
@@ -265,15 +276,7 @@ select{
     
 }
 
-.background{
-    background-image: url(../img/back.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
-    width: 100%;
-    max-width: 100%;
-    height: 100vh;
-}
+
 
 
 
