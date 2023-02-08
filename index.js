@@ -4,6 +4,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require('path');
 const dotenv = require('dotenv')
+const cors =  require('cors')
 
 
 //config do dotenv -variaveis de ambiente
@@ -42,7 +43,7 @@ const port = process.env.PORT || 5000;
 app.set('view engine', 'ejs');
 //app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/src/views'));
-
+app.use(cors())
 app.use(express.static(__dirname + '/src/views'));
 app.use(express.static(__dirname + '/src/views/scripts'));
 app.use(express.static(__dirname + '/src/views/img'));
