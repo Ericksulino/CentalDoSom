@@ -1,6 +1,5 @@
 // inportando bibliotecas
 const express = require("express");
-const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require('path');
 const dotenv = require('dotenv')
@@ -12,7 +11,7 @@ dotenv.config();
 
 
 //rota com o front
-const routes = require("./src/routes/front.route")
+//const routes = require("./src/routes/front.route")
 
 
 //Rotas backend 
@@ -40,19 +39,14 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 //app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, '/src/views'));
+//app.set('views', path.join(__dirname, '/src/views'));
 app.use(cors())
-app.use(express.static(__dirname + '/src/views'));
-app.use(express.static(__dirname + '/src/views/scripts'));
-app.use(express.static(__dirname + '/src/views/img'));
+//app.use(express.static(__dirname + '/src/views'));
+//app.use(express.static(__dirname + '/src/views/scripts'));
+//app.use(express.static(__dirname + '/src/views/img'));
 
-app.use(session({
-    secret: "secret-key",
-    resave: false,
-    saveUninitialized: false
-}));
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -68,7 +62,7 @@ app.use("/auth",authRote);
 
 
 // Rotas do frontend
-app.use(routes);
+//app.use(routes);
 
 //pegando o ip
 const os = require('os');
