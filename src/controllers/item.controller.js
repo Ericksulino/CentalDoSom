@@ -2,14 +2,22 @@ const itemService = require("../services/item.service");
 
 const create = async (req,res) =>{
     try{
-        const {nome,categoria,tipo,descricao,valor,anunciante,foto} = req.body;
+        const {nome,categoria,tipo,descricao,valor,foto} = req.body;
 
-    if(!nome || !categoria || !tipo || !descricao || !valor || !anunciante || !foto){
+    if(!nome || !categoria || !tipo || !descricao || !valor || !foto){
         res.status(400).send({message: "envie todos os campos para o registro!"});
         
     }
     else {
-    try{const item = await itemService.createService(req.body)
+    try{const item = await itemService.createService({
+        nome,
+        categoria,
+        tipo,
+        descricao,
+        valor,
+        anunciante: "63e0637fdd2d0f6fe5664025",
+        foto,
+    })
 
     if(!item){
         res.status(400).send({message: "Erro ao criar o Item!"});

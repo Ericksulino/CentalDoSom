@@ -18,12 +18,12 @@ module.exports = authMiddleware = (req,res,next)=>{
         if(schema !== 'Bearer'){
             return res.status(401);
         }
-        jwt.verify(token,process.env.SECRET_JWT, (error, decode) =>{
+        jwt.verify(token,process.env.SECRET_JWT, async(error, decode) =>{
             if (error) {
                 return res.status(401).send({ message: "Token inválido" });
               }
             console.log(decode);
-            const user = userService.findByIdService(decode.id);
+            const user = await userService.findByIdService(decode.id);
             req.userId = user.id;
         })
         
