@@ -1,7 +1,8 @@
 const route = require("express").Router();
 const itemController = require("../controllers/item.controller");
+const authMiddleware = require("../middleware/auth.middlieware");
 
-route.post("/",itemController.create);
+route.post("/",authMiddleware,itemController.create);
 
 route.get("/",itemController.findAll);
 
