@@ -5,7 +5,6 @@ const path = require('path');
 const dotenv = require('dotenv')
 const cors =  require('cors')
 
-
 //config do dotenv -variaveis de ambiente
 dotenv.config();
 
@@ -31,6 +30,9 @@ const messageRoute = require("./src/routes/message.route");
 //Rota com o Banco de dados
 const connectDatabase = require("./src/database/db")
 
+//rota para imagens
+
+const imgRouter = require("./src/routes/img.route");
 
 
 
@@ -47,7 +49,7 @@ app.use(cors())
 //app.use(express.static(__dirname + '/src/views/scripts'));
 //app.use(express.static(__dirname + '/src/views/img'));
 
-
+app.use(express.static('./src/uploads'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
@@ -59,6 +61,7 @@ app.use("/user",userRoute);
 app.use("/item",itemRoute);
 app.use("/msg",messageRoute);
 app.use("/auth",authRote);
+app.use("/imagens",imgRouter);
 
 
 // Rotas do frontend
