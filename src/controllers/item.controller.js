@@ -15,7 +15,7 @@ const create = async (req,res) =>{
         tipo,
         descricao,
         valor,
-        anunciante: "63e0637fdd2d0f6fe5664025",
+        anunciante: req.userId,
         foto,
     })
 

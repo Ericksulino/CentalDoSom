@@ -25,9 +25,10 @@ module.exports = authMiddleware = (req,res,next)=>{
             console.log(decode);
             const user = await userService.findByIdService(decode.id);
             req.userId = user.id;
+            return next();
         })
         
-        next();
+      
     } catch (error){
         res.status(500).send(error.message);
     }
