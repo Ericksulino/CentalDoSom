@@ -1,22 +1,29 @@
 const itemService = require("../services/item.service");
+const fs = require("fs");
+const path = require("path");
 
 const create = async (req,res) =>{
     try{
-        const {nome,categoria,tipo,descricao,valor,foto} = req.body;
+        const {nome,categoria,tipo,descricao,valor} = req.body;
 
-    if(!nome || !categoria || !tipo || !descricao || !valor || !foto){
+    if(!nome || !categoria || !tipo || !descricao || !valor){
         res.status(400).send({message: "envie todos os campos para o registro!"});
         
     }
     else {
-    try{const item = await itemService.createService({
+    try{
+        const file = req.file
+        console.log( path.basename(file.path));
+
+        const img = path.basename(file.path);
+        const item = await itemService.createService({
         nome,
         categoria,
         tipo,
         descricao,
         valor,
         anunciante: req.userId,
-        foto,
+        foto: img
     })
 
     if(!item){
