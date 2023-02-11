@@ -17,6 +17,14 @@ const seachByNomeService = (nome) => item.find({
 
 const byUserService = (id) => item.find({anunciante: id}).sort({_id:-1}).populate("anunciante");
 
+const filtCategService = (categoria) => item.find({
+    categoria: {$regex: `${categoria || ''}`, $options: "i"},
+}).sort({_id:-1}).populate("anunciante");
+
+const filtTipService = (tipo) => item.find({
+    tipo: {$regex: `${tipo || ''}`, $options: "i"},
+}).sort({_id:-1}).populate("anunciante");
+
 module.exports = {
     createService,
     findAllService,
@@ -24,5 +32,7 @@ module.exports = {
     contItens,
     topItemService,
     seachByNomeService,
-    byUserService
+    byUserService,
+    filtCategService,
+    filtTipService
 };

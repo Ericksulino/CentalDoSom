@@ -206,11 +206,69 @@ const byUser = async(req,res) =>{
     }
 };
 
+const filtCategoria = async(req,res) =>{
+    try{
+        const {categoria} = req.query;
+        const prodIten = await itemService.filtCategService(categoria);
+        if(prodIten.length == 0){
+            return res.status(400).send({message: "Não há item registrado nessa categoria!"});
+        }
+        res.send({
+            produtos : prodIten.map(prodIten => {
+                return{
+                id: prodIten._id,
+                nome: prodIten.nome,
+                categoria: prodIten.categoria,
+                descricao: prodIten.descricao,
+                valor:prodIten.valor,
+                foto: prodIten.foto,
+                userName : prodIten.anunciante.name,
+                userNumber : prodIten.anunciante.number,
+                userCity : prodIten.anunciante.city,
+                userUF: prodIten.anunciante.state
+                }
+    })})
+
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+};
+
+const filtTipo = async(req,res) =>{
+    try{
+        const {tipo} = req.query;
+        const prodIten = await itemService.filtTipService(tipo);
+        if(prodIten.length == 0){
+            return res.status(400).send({message: "Não há item registrado nesse tipo!"});
+        }
+        res.send({
+            produtos : prodIten.map(prodIten => {
+                return{
+                id: prodIten._id,
+                nome: prodIten.nome,
+                categoria: prodIten.categoria,
+                descricao: prodIten.descricao,
+                valor:prodIten.valor,
+                foto: prodIten.foto,
+                userName : prodIten.anunciante.name,
+                userNumber : prodIten.anunciante.number,
+                userCity : prodIten.anunciante.city,
+                userUF: prodIten.anunciante.state
+                }
+    })})
+
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+};
+
 module.exports = {
     create,
     findAll,
     topItem,
     findById,
     seachByNome,
-    byUser
+    byUser,
+    filtCategoria,
+    filtTipo
 };

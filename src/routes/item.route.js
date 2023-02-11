@@ -12,6 +12,10 @@ route.get("/top", itemController.topItem);
 
 route.get("/seach",itemController.seachByNome);
 
+route.get("/category",itemController.filtCategoria);
+
+route.get("/type",itemController.filtTipo);
+
 route.get("/byUser",authMiddleware,itemController.byUser)
 
 route.get("/:id",authMiddleware,itemController.findById);
