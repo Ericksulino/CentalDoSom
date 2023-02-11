@@ -178,10 +178,39 @@ const seachByNome = async(req,res) =>{
     }
 };
 
+const byUser = async(req,res) =>{
+    try{
+        const id = req.userId;
+        const prodIten = await itemService.byUserService(id);
+        if(prodIten.length == 0){
+            return res.status(400).send({message: "Não há item registrado nesse anunciante!"});
+        }
+        res.send({
+            produtos : prodIten.map(prodIten => {
+                return{
+                id: prodIten._id,
+                nome: prodIten.nome,
+                categoria: prodIten.categoria,
+                descricao: prodIten.descricao,
+                valor:prodIten.valor,
+                foto: prodIten.foto,
+                userName : prodIten.anunciante.name,
+                userNumber : prodIten.anunciante.number,
+                userCity : prodIten.anunciante.city,
+                userUF: prodIten.anunciante.state
+                }
+    })})
+
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+};
+
 module.exports = {
     create,
     findAll,
     topItem,
     findById,
-    seachByNome
+    seachByNome,
+    byUser
 };

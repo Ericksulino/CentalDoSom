@@ -15,11 +15,14 @@ const seachByNomeService = (nome) => item.find({
     nome: {$regex: `${nome || ''}`, $options: "i"},
 }).sort({_id:-1}).populate("anunciante");
 
+const byUserService = (id) => item.find({anunciante: id}).sort({_id:-1}).populate("anunciante");
+
 module.exports = {
     createService,
     findAllService,
     findByIdService,
     contItens,
     topItemService,
-    seachByNomeService
+    seachByNomeService,
+    byUserService
 };

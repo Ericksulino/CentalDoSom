@@ -12,6 +12,8 @@ route.get("/top", itemController.topItem);
 
 route.get("/seach",itemController.seachByNome);
 
+route.get("/byUser",authMiddleware,itemController.byUser)
+
 route.get("/:id",authMiddleware,itemController.findById);
 
 module.exports = route;
