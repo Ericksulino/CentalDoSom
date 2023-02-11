@@ -94,7 +94,7 @@ const findAll = async (req,res) =>{
     res.status(500).send({message: err.message});
 }
     
-}
+};
 
 const topItem = async (req,res) => {
     try{
@@ -120,7 +120,7 @@ const topItem = async (req,res) => {
 } catch(err){
     res.status(500).send({message: err.message});
 }
-}
+};
 
 const findById = async(req,res) =>{
     try{
@@ -146,11 +146,42 @@ const findById = async(req,res) =>{
     }catch(err){
         res.status(500).send({message: err.message});
     }
-} 
+};
+
+const seachByNome = async(req,res) =>{
+    try{
+        const {nome} = req.query;
+
+        const prodIten = await itemService.seachByNomeService(nome);
+
+        if(prodIten.length == 0){
+            return res.status(400).send({message: "Não há item registrado com esse nome!"});
+        }
+        res.send({
+            produtos : prodIten.map(prodIten => {
+                return{
+                id: prodIten._id,
+                nome: prodIten.nome,
+                categoria: prodIten.categoria,
+                descricao: prodIten.descricao,
+                valor:prodIten.valor,
+                foto: prodIten.foto,
+                userName : prodIten.anunciante.name,
+                userNumber : prodIten.anunciante.number,
+                userCity : prodIten.anunciante.city,
+                userUF: prodIten.anunciante.state
+                }
+    })})
+
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+};
 
 module.exports = {
     create,
     findAll,
     topItem,
-    findById
-}
+    findById,
+    seachByNome
+};

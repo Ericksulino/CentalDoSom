@@ -10,6 +10,8 @@ route.get("/",itemController.findAll);
 
 route.get("/top", itemController.topItem);
 
-route.get("/:id",itemController.findById);
+route.get("/seach",itemController.seachByNome);
+
+route.get("/:id",authMiddleware,itemController.findById);
 
 module.exports = route;
