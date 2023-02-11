@@ -8,9 +8,12 @@ const contItens = () => item.countDocuments();
 
 const findByIdService = (id) => item.findById(id);
 
+const topItemService = () => item.findOne().sort({_id:-1}).populate("anunciante");
+
 module.exports = {
     createService,
     findAllService,
     findByIdService,
     contItens,
+    topItemService
 };

@@ -44,6 +44,7 @@ const create = async (req,res) =>{
 };
 
 const findAll = async (req,res) =>{
+    try{
     let {limit, offset} = req.query;
     limit = Number(limit);
     offset = Number(offset);
@@ -89,10 +90,40 @@ const findAll = async (req,res) =>{
             }
         })
     });
+}catch(err){
+    res.status(500).send({message: err.message});
+}
     
+}
+
+const topItem = async (req,res) => {
+    try{
+    const prodIten = await itemService.topItemService();
+
+    if(!prodIten){
+        return res.status(400).send({message: "Não há item registrado!"});
+    }
+    res.send({
+        item : {
+        id: prodIten._id,
+        nome: prodIten.nome,
+        categoria: prodIten.categoria,
+        descricao: prodIten.descricao,
+        valor:prodIten.valor,
+        foto: prodIten.foto,
+        userName : prodIten.anunciante.name,
+        userNumber : prodIten.anunciante.number,
+        userCity : prodIten.anunciante.city,
+        userUF: prodIten.anunciante.state
+        }
+    });
+} catch(err){
+    res.status(500).send({message: err.message});
+}
 }
 
 module.exports = {
     create,
     findAll,
+    topItem
 }
