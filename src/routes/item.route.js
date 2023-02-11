@@ -8,6 +8,8 @@ route.post("/",authMiddleware,upload.single("file"),itemController.create);
 
 route.get("/",itemController.findAll);
 
-route.get("/top", itemController.topItem)
+route.get("/top", itemController.topItem);
+
+route.get("/:id",itemController.findById);
 
 module.exports = route;

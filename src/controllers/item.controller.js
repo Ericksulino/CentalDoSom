@@ -122,8 +122,35 @@ const topItem = async (req,res) => {
 }
 }
 
+const findById = async(req,res) =>{
+    try{
+        const {id} = req.params;
+        const prodIten = await itemService.findByIdService(id);
+        if(!prodIten){
+            return res.status(400).send({message: "Não há item registrado!"});
+        }
+        res.send({
+            item : {
+            id: prodIten._id,
+            nome: prodIten.nome,
+            categoria: prodIten.categoria,
+            descricao: prodIten.descricao,
+            valor:prodIten.valor,
+            foto: prodIten.foto,
+            userName : prodIten.anunciante.name,
+            userNumber : prodIten.anunciante.number,
+            userCity : prodIten.anunciante.city,
+            userUF: prodIten.anunciante.state
+            }
+        });
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+} 
+
 module.exports = {
     create,
     findAll,
-    topItem
+    topItem,
+    findById
 }
