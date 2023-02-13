@@ -262,6 +262,27 @@ const filtTipo = async(req,res) =>{
     }
 };
 
+const update = async(req,res) =>{
+    try{
+        const {nome,categoria,tipo,descricao,valor} = req.body;
+        const {id} = req.params;
+        if(!nome && !categoria && !tipo && !descricao && !valor){
+            res.status(400).send({message: "envie todos os campos para o registro!"});
+            
+        }
+        else {
+            const prodIten = await itemService.findByIdService(id);
+            if(prodIten.user._id != req.userId){
+                return res.status(400).send({message:"Você não pode fazer upadte neste item!"});
+            }
+            await itemService.updateService(id,nome,categoria,tipo,descricao,valor);
+            return res.send({message: "Upadate realizado com sucesso!"});
+        }
+    } catch(erro){
+        res.status(500).send({message: erro.message})
+    }
+};
+
 module.exports = {
     create,
     findAll,
@@ -270,5 +291,6 @@ module.exports = {
     seachByNome,
     byUser,
     filtCategoria,
-    filtTipo
+    filtTipo,
+    update
 };

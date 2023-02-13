@@ -25,6 +25,11 @@ const filtTipService = (tipo) => item.find({
     tipo: {$regex: `${tipo || ''}`, $options: "i"},
 }).sort({_id:-1}).populate("anunciante");
 
+const updateService = (id, nome, categoria,tipo,descricao,valor,foto) => item.findByIdAndUpdate({_id: id},{        
+    nome,categoria,tipo,descricao,valor,foto},
+    {rawResult: true}
+    );
+
 module.exports = {
     createService,
     findAllService,
@@ -34,5 +39,6 @@ module.exports = {
     seachByNomeService,
     byUserService,
     filtCategService,
-    filtTipService
+    filtTipService,
+    updateService
 };

@@ -20,4 +20,6 @@ route.get("/byUser",authMiddleware,itemController.byUser)
 
 route.get("/:id",authMiddleware,itemController.findById);
 
+route.patch("/:id",authMiddleware,itemController.update);
+
 module.exports = route;
