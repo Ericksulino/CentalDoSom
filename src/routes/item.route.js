@@ -24,4 +24,6 @@ route.patch("/:id",authMiddleware,upload.single("file"),itemController.update);
 
 
 
+route.patch("/:id",authMiddleware,itemController.update);
+
 module.exports = route;

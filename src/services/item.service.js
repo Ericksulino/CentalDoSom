@@ -25,13 +25,6 @@ const filtTipService = (tipo) => item.find({
     tipo: {$regex: `${tipo || ''}`, $options: "i"},
 }).sort({_id:-1}).populate("anunciante");
 
-const updateService = (id,nome,categoria,tipo,descricao,valor,foto) => 
-item.findOneAndUpdate(
-    {_id: id},
-    {nome,categoria,tipo,descricao,valor,foto},
-    {rawResult: true}
-    );
-
 module.exports = {
     createService,
     findAllService,
