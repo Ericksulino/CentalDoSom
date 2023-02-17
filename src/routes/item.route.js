@@ -18,6 +18,10 @@ route.get("/type",itemController.filtTipo);
 
 route.get("/byUser",authMiddleware,itemController.byUser)
 
-route.get("/:id",authMiddleware,itemController.findById);
+route.get("/:id",itemController.findById);
+
+route.patch("/:id",authMiddleware,upload.single("file"),itemController.update);
+
+
 
 module.exports = route;

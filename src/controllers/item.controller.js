@@ -32,9 +32,8 @@ const create = async (req,res) =>{
         
     }
 
-    res.status(201).send({
-        message: "Item criado com sucesso!"
-    })} catch(err){
+    res.status(201).send({message: "Item criado com sucesso!"})
+    } catch(err){
         res.status(500).send({message: err.message});
     }
 }
@@ -75,18 +74,18 @@ const findAll = async (req,res) =>{
         limit,
         offset,
         total,
-        produtos : itens.map(prodIten => {
+        produtos : itens.map(prodItem => {
             return{
-            id: prodIten._id,
-            nome: prodIten.nome,
-            categoria: prodIten.categoria,
-            descricao: prodIten.descricao,
-            valor:prodIten.valor,
-            foto: prodIten.foto,
-            userName : prodIten.anunciante.name,
-            userNumber : prodIten.anunciante.number,
-            userCity : prodIten.anunciante.city,
-            userUF: prodIten.anunciante.state
+            id: prodItem._id,
+            nome: prodItem.nome,
+            categoria: prodItem.categoria,
+            descricao: prodItem.descricao,
+            valor:prodItem.valor,
+            foto: prodItem.foto,
+            userName : prodItem.anunciante.name,
+            userNumber : prodItem.anunciante.number,
+            userCity : prodItem.anunciante.city,
+            userUF: prodItem.anunciante.state
             }
         })
     });
@@ -98,23 +97,23 @@ const findAll = async (req,res) =>{
 
 const topItem = async (req,res) => {
     try{
-    const prodIten = await itemService.topItemService();
+    const prodItem = await itemService.topItemService();
 
-    if(!prodIten){
+    if(!prodItem){
         return res.status(400).send({message: "Não há item registrado!"});
     }
     res.send({
         item : {
-        id: prodIten._id,
-        nome: prodIten.nome,
-        categoria: prodIten.categoria,
-        descricao: prodIten.descricao,
-        valor:prodIten.valor,
-        foto: prodIten.foto,
-        userName : prodIten.anunciante.name,
-        userNumber : prodIten.anunciante.number,
-        userCity : prodIten.anunciante.city,
-        userUF: prodIten.anunciante.state
+        id: prodItem._id,
+        nome: prodItem.nome,
+        categoria: prodItem.categoria,
+        descricao: prodItem.descricao,
+        valor:prodItem.valor,
+        foto: prodItem.foto,
+        userName : prodItem.anunciante.name,
+        userNumber : prodItem.anunciante.number,
+        userCity : prodItem.anunciante.city,
+        userUF: prodItem.anunciante.state
         }
     });
 } catch(err){
@@ -125,22 +124,22 @@ const topItem = async (req,res) => {
 const findById = async(req,res) =>{
     try{
         const {id} = req.params;
-        const prodIten = await itemService.findByIdService(id);
-        if(!prodIten){
+        const prodItem = await itemService.findByIdService(id);
+        if(!prodItem){
             return res.status(400).send({message: "Não há item registrado!"});
         }
         res.send({
             item : {
-            id: prodIten._id,
-            nome: prodIten.nome,
-            categoria: prodIten.categoria,
-            descricao: prodIten.descricao,
-            valor:prodIten.valor,
-            foto: prodIten.foto,
-            userName : prodIten.anunciante.name,
-            userNumber : prodIten.anunciante.number,
-            userCity : prodIten.anunciante.city,
-            userUF: prodIten.anunciante.state
+            id: prodItem._id,
+            nome: prodItem.nome,
+            categoria: prodItem.categoria,
+            descricao: prodItem.descricao,
+            valor:prodItem.valor,
+            foto: prodItem.foto,
+            userName : prodItem.anunciante.name,
+            userNumber : prodItem.anunciante.number,
+            userCity : prodItem.anunciante.city,
+            userUF: prodItem.anunciante.state
             }
         });
     }catch(err){
@@ -152,24 +151,24 @@ const seachByNome = async(req,res) =>{
     try{
         const {nome} = req.query;
 
-        const prodIten = await itemService.seachByNomeService(nome);
+        const prodItem = await itemService.seachByNomeService(nome);
 
-        if(prodIten.length == 0){
+        if(prodItem.length == 0){
             return res.status(400).send({message: "Não há item registrado com esse nome!"});
         }
         res.send({
-            produtos : prodIten.map(prodIten => {
+            produtos : prodItem.map(prodItem => {
                 return{
-                id: prodIten._id,
-                nome: prodIten.nome,
-                categoria: prodIten.categoria,
-                descricao: prodIten.descricao,
-                valor:prodIten.valor,
-                foto: prodIten.foto,
-                userName : prodIten.anunciante.name,
-                userNumber : prodIten.anunciante.number,
-                userCity : prodIten.anunciante.city,
-                userUF: prodIten.anunciante.state
+                id: prodItem._id,
+                nome: prodItem.nome,
+                categoria: prodItem.categoria,
+                descricao: prodItem.descricao,
+                valor:prodItem.valor,
+                foto: prodItem.foto,
+                userName : prodItem.anunciante.name,
+                userNumber : prodItem.anunciante.number,
+                userCity : prodItem.anunciante.city,
+                userUF: prodItem.anunciante.state
                 }
     })})
 
@@ -181,23 +180,23 @@ const seachByNome = async(req,res) =>{
 const byUser = async(req,res) =>{
     try{
         const id = req.userId;
-        const prodIten = await itemService.byUserService(id);
-        if(prodIten.length == 0){
+        const prodItem = await itemService.byUserService(id);
+        if(prodItem.length == 0){
             return res.status(400).send({message: "Não há item registrado nesse anunciante!"});
         }
         res.send({
-            produtos : prodIten.map(prodIten => {
+            produtos : prodItem.map(prodItem => {
                 return{
-                id: prodIten._id,
-                nome: prodIten.nome,
-                categoria: prodIten.categoria,
-                descricao: prodIten.descricao,
-                valor:prodIten.valor,
-                foto: prodIten.foto,
-                userName : prodIten.anunciante.name,
-                userNumber : prodIten.anunciante.number,
-                userCity : prodIten.anunciante.city,
-                userUF: prodIten.anunciante.state
+                id: prodItem._id,
+                nome: prodItem.nome,
+                categoria: prodItem.categoria,
+                descricao: prodItem.descricao,
+                valor:prodItem.valor,
+                foto: prodItem.foto,
+                userName : prodItem.anunciante.name,
+                userNumber : prodItem.anunciante.number,
+                userCity : prodItem.anunciante.city,
+                userUF: prodItem.anunciante.state
                 }
     })})
 
@@ -209,23 +208,23 @@ const byUser = async(req,res) =>{
 const filtCategoria = async(req,res) =>{
     try{
         const {categoria} = req.query;
-        const prodIten = await itemService.filtCategService(categoria);
-        if(prodIten.length == 0){
+        const prodItem = await itemService.filtCategService(categoria);
+        if(prodItem.length == 0){
             return res.status(400).send({message: "Não há item registrado nessa categoria!"});
         }
         res.send({
-            produtos : prodIten.map(prodIten => {
+            produtos : prodItem.map(prodItem => {
                 return{
-                id: prodIten._id,
-                nome: prodIten.nome,
-                categoria: prodIten.categoria,
-                descricao: prodIten.descricao,
-                valor:prodIten.valor,
-                foto: prodIten.foto,
-                userName : prodIten.anunciante.name,
-                userNumber : prodIten.anunciante.number,
-                userCity : prodIten.anunciante.city,
-                userUF: prodIten.anunciante.state
+                id: prodItem._id,
+                nome: prodItem.nome,
+                categoria: prodItem.categoria,
+                descricao: prodItem.descricao,
+                valor:prodItem.valor,
+                foto: prodItem.foto,
+                userName : prodItem.anunciante.name,
+                userNumber : prodItem.anunciante.number,
+                userCity : prodItem.anunciante.city,
+                userUF: prodItem.anunciante.state
                 }
     })})
 
@@ -237,25 +236,62 @@ const filtCategoria = async(req,res) =>{
 const filtTipo = async(req,res) =>{
     try{
         const {tipo} = req.query;
-        const prodIten = await itemService.filtTipService(tipo);
-        if(prodIten.length == 0){
+        const prodItem = await itemService.filtTipService(tipo);
+        if(prodItem.length == 0){
             return res.status(400).send({message: "Não há item registrado nesse tipo!"});
         }
         res.send({
-            produtos : prodIten.map(prodIten => {
+            produtos : prodItem.map(prodItem => {
                 return{
-                id: prodIten._id,
-                nome: prodIten.nome,
-                categoria: prodIten.categoria,
-                descricao: prodIten.descricao,
-                valor:prodIten.valor,
-                foto: prodIten.foto,
-                userName : prodIten.anunciante.name,
-                userNumber : prodIten.anunciante.number,
-                userCity : prodIten.anunciante.city,
-                userUF: prodIten.anunciante.state
+                id: prodItem._id,
+                nome: prodItem.nome,
+                categoria: prodItem.categoria,
+                descricao: prodItem.descricao,
+                valor:prodItem.valor,
+                foto: prodItem.foto,
+                userName : prodItem.anunciante.name,
+                userNumber : prodItem.anunciante.number,
+                userCity : prodItem.anunciante.city,
+                userUF: prodItem.anunciante.state
                 }
     })})
+
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+};
+
+const update = async(req,res) =>{
+    try{
+        const {nome,categoria,tipo,descricao,valor} = req.body;
+        const id = req.params.id;
+        const file = req.file;
+        let foto = undefined;
+        if(typeof file !== 'undefined'){
+            foto = path.basename(file.path);
+        }
+        
+    if(!nome && !categoria && !tipo && !descricao && !valor){
+        res.status(400).send({message: "envie pelo menos um campo para atualizar!"});
+        
+    }
+    else {
+        console.log(id);
+        const prodItem = await itemService.findByIdService(id);
+
+        if(prodItem.anunciante._id != req.userId){
+            res.status(400).send({message: "você não pode atualizar um item que não seja seu!"});
+        }
+
+        if (typeof foto !== 'undefined' && foto) {
+            await itemService.updateService(id, nome, categoria, tipo, descricao, valor, foto);
+        } else {
+            await itemService.updateService(id, nome, categoria, tipo, descricao, valor);
+        }
+
+
+        res.status(201).send({message: "Item atualizado com sucesso!"})
+    }
 
     }catch(err){
         res.status(500).send({message: err.message});
@@ -270,5 +306,6 @@ module.exports = {
     seachByNome,
     byUser,
     filtCategoria,
-    filtTipo
+    filtTipo,
+    update
 };
