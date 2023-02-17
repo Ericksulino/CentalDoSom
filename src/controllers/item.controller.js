@@ -261,6 +261,43 @@ const filtTipo = async(req,res) =>{
     }
 };
 
+const update = async(req,res) =>{
+    try{
+        const {nome,categoria,tipo,descricao,valor} = req.body;
+        const id = req.params.id;
+        const file = req.file;
+        let foto = undefined;
+        if(typeof file !== 'undefined'){
+            foto = path.basename(file.path);
+        }
+        
+    if(!nome && !categoria && !tipo && !descricao && !valor){
+        res.status(400).send({message: "envie pelo menos um campo para atualizar!"});
+        
+    }
+    else {
+        console.log(id);
+        const prodItem = await itemService.findByIdService(id);
+
+        if(prodItem.anunciante._id != req.userId){
+            res.status(400).send({message: "você não pode atualizar um item que não seja seu!"});
+        }
+
+        if (typeof foto !== 'undefined' && foto) {
+            await itemService.updateService(id, nome, categoria, tipo, descricao, valor, foto);
+        } else {
+            await itemService.updateService(id, nome, categoria, tipo, descricao, valor);
+        }
+
+
+        res.status(201).send({message: "Item atualizado com sucesso!"})
+    }
+
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+};
+
 module.exports = {
     create,
     findAll,
