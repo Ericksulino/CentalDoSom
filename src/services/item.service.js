@@ -30,7 +30,9 @@ item.findOneAndUpdate(
     {_id: id},
     {nome,categoria,tipo,descricao,valor,foto},
     {rawResult: true}
-    );
+);
+
+const eraseService = (id) => item.findByIdAndDelete({_id:id});
 
 module.exports = {
     createService,
@@ -42,5 +44,6 @@ module.exports = {
     byUserService,
     filtCategService,
     filtTipService,
-    updateService
+    updateService,
+    eraseService
 };

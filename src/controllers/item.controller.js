@@ -299,6 +299,23 @@ const update = async(req,res) =>{
     }
 };
 
+const erase = async(req,res) =>{
+    try{
+        const id = req.params.id;
+        const prodItem = await itemService.findByIdService(id);
+        const oldFoto = prodItem.foto;
+
+        if(prodItem.anunciante._id != req.userId){
+            res.status(400).send({message: "você não pode atualizar um item que não seja seu!"});
+        }
+        await itemService.eraseService(id);
+        await fs.promises.unlink('src/uploads/' + oldFoto);
+        res.status(201).send({message: "Item deletado com sucesso!"});
+
+    }catch(err){
+        res.status(500).send({message: err.message});
+    }
+};
 module.exports = {
     create,
     findAll,
@@ -308,5 +325,6 @@ module.exports = {
     byUser,
     filtCategoria,
     filtTipo,
-    update
+    update,
+    erase
 };

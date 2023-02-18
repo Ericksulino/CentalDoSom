@@ -22,8 +22,6 @@ route.get("/:id",itemController.findById);
 
 route.patch("/:id",authMiddleware,upload.single("file"),itemController.update);
 
-
-
-route.patch("/:id",authMiddleware,itemController.update);
+route.delete("/:id",authMiddleware,itemController.erase);
 
 module.exports = route;
