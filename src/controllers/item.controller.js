@@ -276,15 +276,16 @@ const update = async(req,res) =>{
         
     }
     else {
-        console.log(id);
         const prodItem = await itemService.findByIdService(id);
 
         if(prodItem.anunciante._id != req.userId){
             res.status(400).send({message: "você não pode atualizar um item que não seja seu!"});
         }
+        const oldFoto = prodItem.foto;
 
         if (typeof foto !== 'undefined' && foto) {
             await itemService.updateService(id, nome, categoria, tipo, descricao, valor, foto);
+            await fs.promises.unlink('src/uploads/' + oldFoto);
         } else {
             await itemService.updateService(id, nome, categoria, tipo, descricao, valor);
         }
