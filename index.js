@@ -57,7 +57,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 //Conexão com o Banco de dados
-//connectDatabase()
+connectDatabase()
 
 //Rotas do backend
 app.use("/user",userRoute);
