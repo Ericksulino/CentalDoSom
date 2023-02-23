@@ -27,6 +27,9 @@ const authRote = require("./src/routes/auth.route");
 //mensagem de contato
 const messageRoute = require("./src/routes/message.route");
 
+//swagger
+const swaggerRoute = require("./src/routes/swagger.route")
+
 //Rota com o Banco de dados
 const connectDatabase = require("./src/database/db")
 
@@ -54,7 +57,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 //Conexão com o Banco de dados
-connectDatabase()
+//connectDatabase()
 
 //Rotas do backend
 app.use("/user",userRoute);
@@ -62,6 +65,7 @@ app.use("/item",itemRoute);
 app.use("/msg",messageRoute);
 app.use("/auth",authRote);
 app.use("/imagens",imgRouter);
+app.use("/doc",swaggerRoute);
 
 
 // Rotas do frontend
