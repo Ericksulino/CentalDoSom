@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const { use } = require("../routes/auth.route");
 const { loginService, generateToken } = require("../services/auth.service");
+const userService = require("../services/user.service");
 
 const login = async(req,res) =>{
 
@@ -27,4 +28,9 @@ const login = async(req,res) =>{
     
 }
 
-module.exports = {login};
+const valid = async (req,res) =>{
+    const user = await userService.findByIdService(req.userId)
+    return res.status(200).send(user.name);
+}
+
+module.exports = {login,valid};

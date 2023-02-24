@@ -180,7 +180,7 @@
         "/auth/":{
             "post": {
                 "summary": "Login to Central do Som",
-                "description": "Route responsible for logging in a registered user",
+                "description": "Route responsible for loging in a registered user",
                 "tags": ["Auth"],
                 "requestBody": {
                   "content": {
@@ -209,6 +209,28 @@
                 }
               }
         },
+        "/auth":{
+          "get": {
+              "summary": "Valid Token",
+              "description": "Route responsible valid user token",
+              "tags": ["Users"],
+              "security": [{ "bearerAuth": [] }],
+              "responses": {
+                "401": {
+                  "description": "Unauthorized"
+                },
+                "400": {
+                  "description": "Not Found"
+                },
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {}
+                  }
+                }
+              }
+            }
+      },
         "/imagens/{imageName}":{
             "get": {
                 "summary": "Search imagem by name",
