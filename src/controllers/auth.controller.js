@@ -30,7 +30,7 @@ const login = async(req,res) =>{
 
 const valid = async (req,res) =>{
     const user = await userService.findByIdService(req.userId)
-    return res.status(200).send(user.name);
+    return res.status(201).send({message:"token válido", user: user.name});
 }
 
 module.exports = {login,valid};
